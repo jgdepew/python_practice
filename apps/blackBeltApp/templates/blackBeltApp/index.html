@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Black Belt</title>
+</head>
+<body>
+
+	<h2>Welcome, {{request.session.username}}</h2>
+	<p><a href="{% url 'dashboard:newQuestion' %}">Ask a new Question</a> | <a href="{% url 'dashboard:logout' %}">Logout</a></p>
+
+	<table>
+		<tr>
+			<th>Question</th>
+			<th># of Answers</th>
+			<th>Actions</th>
+		</tr>
+		{% for question in questions %}
+		<tr>
+			<td>{{question.question}}</td>
+			<td>{{question.answer_set.count}}</td>
+			<td><a href="question/{{question.id}}">Show</a> | <a href="newAnswer/{{question.id}}">Answer</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+
+</body>
+</html>

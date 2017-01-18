@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{question.question}}</title>
+</head>
+<body>
+
+	<h2>Question:</h2>
+	<p>{{question.question}}</p>
+	<p>Description: {{question.description}}</p>
+	{% if question.user.id == request.session.id %}
+	<a href="/editQuestion/{{question.id}}">Edit</a>
+	{% endif %}
+	<p><a href="/newAnswer/{{question.id}}">Answer this Question</a> | <a href="{% url 'dashboard:index' %}">Home</a> | <a href="{% url 'dashboard:logout' %}">Logout</a></p>
+
+	{% for answer in answers %}
+		<h5>{{answer.user.username}} said: </h5>
+		<p>Answer: {{answer.answer}}</p>
+		<p>Details: {{answer.detail}}</p>
+	{% endfor %}
+
+</body>
+</html>

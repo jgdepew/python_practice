@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+</head>
+<body>
+
+	<h2>Login</h2>
+	<div id="login">
+		<form action="{% url 'dashboard:login' %}" method="post">
+			{% csrf_token %}
+			<p>username: <input type="text" name="username"></p>
+			<p>password: <input type="text" name="password"></p>
+			<input type="submit" value="Login">
+		</form>
+	</div>
+
+	<h2>Register</h2>
+	<div id="register">
+		<form action="{% url 'dashboard:login' %}" method="post">
+			{% csrf_token %}
+			<p>First Name: <input type="text" name="firstName"></p>
+			<p>Last Name: <input type="text" name="lastName"></p>
+			<p>email: <input type="text" name="email"></p>
+			<p>username: <input type="text" name="username"></p>
+			<p>Date of Birth: <input type="date" name="dob"></p>
+			<p>Password: <input type="text" name="password1"></p>
+			<p>Confirm Password: <input type="text" name="password2"></p>
+			<input type="submit" value="Register">
+		</form>
+	</div>
+
+	{% if messages %}
+		<ul class="messages">
+		{% for message in messages %}
+			<li {% if messages.tags %} class="{{messages.tags}}"{% endif %}>
+				{{message}}
+			</li>
+		{% endfor %}
+		</ul>
+	{% endif %}
+</body>
+</html>

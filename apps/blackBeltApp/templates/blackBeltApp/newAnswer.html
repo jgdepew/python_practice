@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>New Question</title>
+</head>
+<body>
+	<h2>New Answer</h2>
+	<p><a href="{% url 'dashboard:index' %}">Home</a> | <a href="{% url 'dashboard:logout' %}">Logout</a></p>
+	
+	<h4>Question: </h4>
+	<p>{{question.question}}</p>
+	<p>Description: {{question.description}}</p>
+
+	<div id="newAnswer">
+		<form action="/newAnswer/{{question.id}}" method="post">
+			{% csrf_token %}
+			<p>Answer: <input type="text" name="answer"></p>
+			<p>Details (optional): <input type="text" name="detail"></p>
+			<button><a href="{% url 'dashboard:index' %}">Cancel</a></button>
+			<input type="Submit" value="Submit">
+		</form>
+	</div>
+	{% if messages %}
+		<ul class="messages">
+		{% for message in messages %}
+			<li {% if messages.tags %} class="{{messages.tags}}"{% endif %}>
+				{{message}}
+			</li>
+		{% endfor %}
+		</ul>
+	{% endif %}
+</body>
+</html>

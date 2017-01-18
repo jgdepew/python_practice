@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>New Question</title>
+</head>
+<body>
+	<h2>Edit Question</h2>
+	<p><a href="{% url 'dashboard:index' %}">Home</a> | <a href="{% url 'dashboard:logout' %}">Logout</a></p>
+	<div id="newQuestion">
+		<form action="/editQuestion/{{question.id}}" method="post">
+			{% csrf_token %}
+			<p>Question: <input type="text" name="question" placeholder="{{question.question}}"></p>
+			<p>Description: <input type="text" name="description" placeholder="{{question.description}}"></p>
+			<button><a href="{% url 'dashboard:index' %}">Cancel</a></button>
+			<input type="Submit" value="Submit">
+		</form>
+	</div>
+	{% if messages %}
+		<ul class="messages">
+		{% for message in messages %}
+			<li {% if messages.tags %} class="{{messages.tags}}"{% endif %}>
+				{{message}}
+			</li>
+		{% endfor %}
+		</ul>
+	{% endif %}
+</body>
+</html>
